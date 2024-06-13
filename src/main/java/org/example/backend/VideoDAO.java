@@ -45,4 +45,29 @@ public class VideoDAO {
         }
         return videos;
     }
-}
+
+    public static List<Video> getTopFive() {
+        List<Video> videos = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+            String sql = "SELECT * FROM videos ORDER BY ((positive_votes + 1.9208) / (positive_votes + total_votes) - " +
+                    "1.96 * SQRT((positive_votes * total_votes) / (positive_votes + total_votes) + 0.9604) / " +
+                    "(positive_votes + total_votes)) / (1 + 3.8416 / (positive_votes + total_votes)) DESC LIMIT 5";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                ResultSet rs = statement.executeQuery();
+                while (rs.next()) {
+                    Video video = new Video(
+                            rs.getInt("id"),
+                            rs.getString("title"),
+                            rs.getString("description"),
+                            rs.getInt("positive_votes"),
+                            rs.getInt("total_votes"),
+                            rs.getString("embed_code")
+                    );
+                    videos.add(video);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return videos;
+    }}

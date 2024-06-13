@@ -15,16 +15,15 @@ public class VideoDataGenerator {
     public static void main(String[] args) {
         Faker faker = new Faker();
         String[] embedCodes = {
-                "<iframe src='https://www.youtube.com/embed/IWti5VDb2-U'></iframe>",
-                "<iframe src='https://www.youtube.com/embed/9bZkp7q19f0'></iframe>",
-                "<iframe src='https://www.youtube.com/embed/gtTVuebS-Ss'></iframe>",
-                "<iframe src='https://www.youtube.com/embed/-GxsoWX-Nr4'></iframe>",
-                "<iframe src='https://www.youtube.com/embed/RRj1WOkE9P0'></iframe>",
-                "<iframe src='https://www.youtube.com/embed/VMT50KhLlRw'></iframe>",
-                "<iframe src='https://www.youtube.com/embed/LnrTDS85rC8'></iframe>",
-                "<iframe src='https://www.youtube.com/embed/iv8tu2qemP0'></iframe>",
-                "<iframe src='https://www.youtube.com/embed/QREab0kaAGU'></iframe>",
-                "<iframe src='https://www.youtube.com/embed/LYGPfakosCs'></iframe>",
+                "9bZkp7q19f0",
+                "gtTVuebS-Ss",
+                "-GxsoWX-Nr4",
+                "RRj1WOkE9P0",
+                "VMT50KhLlRw",
+                "LnrTDS85rC8",
+                "iv8tu2qemP0",
+                "QREab0kaAGU",
+                "LYGPfakosCs",
         };
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {

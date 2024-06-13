@@ -17,14 +17,18 @@
     <link rel="stylesheet" href="styles/table.css">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="icon" type="image/jpg" href="https://www.shutterstock.com/image-vector/hand-voting-ballot-box-icon-600nw-1340887919.jpg">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="scripts/HomeScripts.js"></script>
     <title>Home</title>
 </head>
-<body>
+<body onload="fetchVideoData()">
 <div class="navbar">
     <div class="navbar-first-line">
         <p>Video voting competition</p>
         <p>
-            <a href="#" class="icon-link">
+            <a class="icon-link" onclick="refreshVideos()">
                 <i class="fas fa-sync-alt"></i>
             </a>
             <a href="#" class="icon-link">
@@ -37,22 +41,7 @@
         <a href="ranking.html">Rankings</a>
     </div>
 </div>
-<%
-    Video video = (Video) request.getAttribute("video");
-%>
-<div class="video-container">
-    <div class="video-item left-enter">
-        <p>Kad zamirisu jorgovani</p>
-        <%=video.getEmbedCode()%>
-        <button class="google-button-style" role="button">Vote</button>
-    </div>
-    <div class="video-item right-enter">
-        <p>Kad ljubav zakasni</p>
-        <iframe src="https://www.youtube.com/embed/i78bV7KbzAI"
-                allowfullscreen></iframe>
-        <button class="google-button-style" role="button">Vote</button>
-    </div>
-</div>
+<div class="video-container" id="videoContainer"></div>
 <div class="video-table-container">
     <div class="table-title">
         <h2>Top 5 Videos</h2>
@@ -67,37 +56,6 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td><img src="http://img.youtube.com/vi/HS7eJEUYtyU/maxresdefault.jpg" alt="Image 1"></td>
-            <td>Dino Merlin - Kad zamirisu jorgovani</td>
-            <td>10/10</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td><img src="http://img.youtube.com/vi/i78bV7KbzAI/maxresdefault.jpg" alt="Image 2"></td>
-            <td>Sasa Matic - Kad ljubav zakasni</td>
-            <td>9/10</td>
-            <td>2</td>
-        </tr>
-
-        <tr>
-            <td><img src="http://img.youtube.com/vi/gxJEMsppj1s/maxresdefault.jpg" alt="Image 2"></td>
-            <td>Sasa Matic - Idemo Andjele</td>
-            <td>6/10</td>
-            <td>3</td>
-        </tr>
-        <tr>
-            <td><img src="http://img.youtube.com/vi/-DhCgrpPUvQ/maxresdefault.jpg" alt="Image 2"></td>
-            <td>Zdravko Colic - Biraj Ti</td>
-            <td>5/10</td>
-            <td>4</td>
-        </tr>
-        <tr>
-            <td><img src="http://img.youtube.com/vi/ExUxI3HBY38/maxresdefault.jpg" alt="Image 2"></td>
-            <td>Aco Pejovic - Ne pitaj</td>
-            <td>4/10</td>
-            <td>5</td>
-        </tr>
         </tbody>
     </table>
 </div>
