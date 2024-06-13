@@ -1,0 +1,207 @@
+html {
+    font-size: 16px;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("benner_7.jpg");
+
+    margin: 0;
+    padding: 0;
+}
+
+
+.navbar {
+    height: 5rem;
+    padding: 0 2rem 0 2rem;
+    margin-bottom: 1rem;
+    background: #92C7CF;
+}
+.navbar-first-line {
+    display: flex;
+    height: 40px;
+    justify-content: space-between;
+    padding-top: 0.5rem;
+    align-items: center;
+}
+.navbar-first-line p {
+    font-size: 18px;
+}
+.navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+}
+.navigation a {
+    display: inline-block; 
+    padding: 5px 10px; 
+    background-color: #AAD7D9; 
+    color: black; 
+    text-decoration: none;
+    border-radius: 5px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    transition: background-color 0.3s ease, transform 0.3s ease; 
+}
+
+.navigation a:hover {
+    background-color: rgba(146, 199, 207, 1); 
+    transform: translateY(-2px); 
+}
+
+.navigation a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: black;
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    transition: width 0.3s ease; 
+}
+
+.navigation a:hover::after {
+    width: 100%; 
+}
+
+.icon-link {
+    margin-left: 10px;
+    text-decoration: none;
+    color: #333333;
+}
+
+.icon-link:hover {
+    color: #007bff;
+}
+
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+
+.video-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; 
+}
+
+.video-item {
+    text-align: center;
+    background-color: #f9f9f9; 
+    border: 1px solid #e0e0e0; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    padding: 8px;
+    margin: 5px;
+    border-radius: 10px;
+    animation-duration: 0.9s;
+    animation-fill-mode: both;
+}
+
+.video-item.left-enter {
+    animation-name: slideInLeft;
+}
+
+.video-item.right-enter {
+    animation-name: slideInRight;
+}
+
+.video-item iframe {
+    width: 90%;
+    max-width: 560px;
+    height: 300px;
+    border: none;
+}
+
+
+.google-button-style {
+    align-items: center;
+    appearance: none;
+    background-color: #fff;
+    border-radius: 24px;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+    box-sizing: border-box;
+    color: #3c4043;
+    cursor: pointer;
+    display: inline-flex;
+    fill: currentcolor;
+    font-family: "Google Sans", Roboto, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    height: 30px;
+    justify-content: center;
+    letter-spacing: .25px;
+    line-height: normal;
+    max-width: 100%;
+    overflow: visible;
+    padding: 2px 24px;
+    position: relative;
+    text-align: center;
+    text-transform: none;
+    transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1), opacity 15ms linear 30ms, transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: auto;
+    will-change: transform, opacity;
+    z-index: 0;
+}
+
+.google-button-style:hover {
+    background: #F6F9FE;
+    color: #174ea6;
+}
+
+.google-button-style:active {
+    box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
+    outline: none;
+}
+
+.google-button-style:focus {
+    outline: none;
+    border: 2px solid #4285f4;
+}
+
+@media (max-width: 768px) {
+    .navbar p {
+        font-size: 13px;
+    }
+    .video-container{
+        flex-wrap: wrap;
+    }
+
+    .video-item iframe {
+        height: 200px;
+    }
+
+    .video-item p {
+        font-size: 12px;
+    }
+
+    .video-table {
+        width: 95%;
+        font-size: 14px;
+    }
+
+    .video-table img {
+        max-width: 60px; 
+        height: auto; 
+    }
+}

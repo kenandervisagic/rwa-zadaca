@@ -1,0 +1,23 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" build-on-make="true" name="rwa_zadaca:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/rwa_zadaca_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="rwa_zadaca" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.8.8" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.26" />
+          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.11.4" />
+          <element id="library" level="project" name="Maven: com.github.javafaker:javafaker:1.0.2" />
+          <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.5" />
+          <element id="library" level="project" name="Maven: org.yaml:snakeyaml:android:1.23" />
+          <element id="library" level="project" name="Maven: com.github.mifmif:generex:1.0.2" />
+          <element id="library" level="project" name="Maven: dk.brics.automaton:automaton:1.11-8" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="rwa_zadaca/web/Web" />
+    </root>
+  </artifact>
+</component>
