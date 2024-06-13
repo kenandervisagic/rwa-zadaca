@@ -9,9 +9,17 @@ import java.util.List;
 import java.util.Random;
 
 public class VideoDAO {
-    private static final String URL = "jdbc:mysql://localhost:3306/video_db";
+    private static final String URL = "jdbc:mysql://localhost:3305/video_database"; // Ažurirano s portom 3305
     private static final String USER = "root";
-    private static final String PASSWORD = "password";
+    private static final String PASSWORD = "keno";
+    static {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver"); // Load the MySQL driver
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static List<Video> getRandomVideos(int count) {
         List<Video> videos = new ArrayList<>();
@@ -25,9 +33,9 @@ public class VideoDAO {
                             rs.getInt("id"),
                             rs.getString("title"),
                             rs.getString("description"),
-                            rs.getString("url"),
-                            rs.getInt("positiveVotes"),
-                            rs.getInt("totalVotes")
+                            rs.getInt("positive_votes"),
+                            rs.getInt("total_votes"),
+                            rs.getString("embed_code")
                     );
                     videos.add(video);
                 }

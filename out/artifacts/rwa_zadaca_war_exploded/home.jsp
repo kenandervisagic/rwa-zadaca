@@ -1,4 +1,4 @@
-<%--
+<%@ page import="org.example.backend.Video" %><%--
   Created by IntelliJ IDEA.
   User: Kenan
   Date: 6/12/2024
@@ -37,11 +37,13 @@
         <a href="ranking.html">Rankings</a>
     </div>
 </div>
+<%
+    Video video = (Video) request.getAttribute("video");
+%>
 <div class="video-container">
     <div class="video-item left-enter">
         <p>Kad zamirisu jorgovani</p>
-        <iframe src="https://www.youtube.com/embed/HS7eJEUYtyU"
-                allowfullscreen></iframe>
+        <%=video.getEmbedCode()%>
         <button class="google-button-style" role="button">Vote</button>
     </div>
     <div class="video-item right-enter">

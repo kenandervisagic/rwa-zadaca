@@ -15,6 +15,7 @@
           <element id="library" level="project" name="Maven: org.yaml:snakeyaml:android:1.23" />
           <element id="library" level="project" name="Maven: com.github.mifmif:generex:1.0.2" />
           <element id="library" level="project" name="Maven: dk.brics.automaton:automaton:1.11-8" />
+          <element id="library" level="project" name="Maven: com.mysql:mysql-connector-j:8.0.33" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="rwa_zadaca/web/Web" />

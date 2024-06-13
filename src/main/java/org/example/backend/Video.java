@@ -4,18 +4,18 @@ public class Video {
     private int id;
     private String title;
     private String description;
-    private String url;
     private int positiveVotes;
     private int totalVotes;
+    private String embedCode;
 
 
-    public Video(int id, String title, String description, String url, int positiveVotes, int totalVotes) {
+    public Video(int id, String title, String description,  int positiveVotes, int totalVotes, String embedCode) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.url = url;
         this.positiveVotes = positiveVotes;
         this.totalVotes = totalVotes;
+        this.embedCode = embedCode;
     }
 
     public int getId() {
@@ -42,12 +42,12 @@ public class Video {
         this.description = description;
     }
 
-    public String getUrl() {
-        return url;
+    public String getEmbedCode() {
+        return embedCode;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setEmbedCode(String embedCode) {
+        this.embedCode = embedCode;
     }
 
     public int getPositiveVotes() {
