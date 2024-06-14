@@ -12,6 +12,7 @@ public class VideoDAO {
     private static final String URL = "jdbc:mysql://localhost:3305/video_database"; // Ažurirano s portom 3305
     private static final String USER = "root";
     private static final String PASSWORD = "keno";
+
     static {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); // Load the MySQL driver
@@ -46,13 +47,14 @@ public class VideoDAO {
         return videos;
     }
 
-    public static List<Video> getTopFive() {
+    public static List<Video> getTop(int count) {
         List<Video> videos = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
             String sql = "SELECT * FROM videos ORDER BY ((positive_votes + 1.9208) / (positive_votes + total_votes) - " +
                     "1.96 * SQRT((positive_votes * total_votes) / (positive_votes + total_votes) + 0.9604) / " +
-                    "(positive_votes + total_votes)) / (1 + 3.8416 / (positive_votes + total_votes)) DESC LIMIT 5";
+                    "(positive_votes + total_votes)) / (1 + 3.8416 / (positive_votes + total_votes)) DESC LIMIT ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, count);
                 ResultSet rs = statement.executeQuery();
                 while (rs.next()) {
                     Video video = new Video(
@@ -70,4 +72,28 @@ public class VideoDAO {
             e.printStackTrace();
         }
         return videos;
-    }}
+    }
+    public static void incrementPositiveVotes(int videoId) {
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+            String sql = "UPDATE videos SET positive_votes = positive_votes + 1 WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, videoId);
+                statement.executeUpdate();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void incrementTotalVotes(int videoId) {
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+            String sql = "UPDATE videos SET total_votes = total_votes + 1 WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, videoId);
+                statement.executeUpdate();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}

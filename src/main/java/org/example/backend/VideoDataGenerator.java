@@ -24,12 +24,20 @@ public class VideoDataGenerator {
                 "iv8tu2qemP0",
                 "QREab0kaAGU",
                 "LYGPfakosCs",
+                "d7tpYyAnopA",
+                "ks2-b3dUDKw",
+                "XQv3FL5I6RY",
+                "_qBnBbJyNug",
+                "02HYSqHrCZQ",
+                "X-UTfyUbLUw",
+                "1gyUQXVna-8",
+                "6u_cgKR_D3w",
+                "0fhrf-BMPxY"
         };
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
             String sql = "INSERT INTO videos (title, description, positive_votes, total_votes, embed_code) VALUES (?, ?, 0, 0, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
-
             for (int i = 1; i <= VIDEO_COUNT; i++) {
                 String title = "Video " + i;
                 String description = faker.lorem().paragraph();

@@ -20,7 +20,6 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="scripts/HomeScripts.js"></script>
     <title>Home</title>
 </head>
 <body onload="fetchVideoData()">
@@ -31,14 +30,14 @@
             <a class="icon-link" onclick="refreshVideos()">
                 <i class="fas fa-sync-alt"></i>
             </a>
-            <a href="#" class="icon-link">
+            <a id="shareIcon" href="" class="icon-link">
                 <i class="fas fa-share-alt"></i>
             </a>
         </p>
     </div>
     <div class="navigation">
-        <a href="home.html">Home</a>
-        <a href="ranking.html">Rankings</a>
+        <a href="home">Home</a>
+        <a href="rankings">Rankings</a>
     </div>
 </div>
 <div class="video-container" id="videoContainer"></div>
@@ -59,5 +58,6 @@
         </tbody>
     </table>
 </div>
+<script src="scripts/HomeScripts.js"></script>
 </body>
 </html>

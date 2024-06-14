@@ -10,6 +10,22 @@ body {
 }
 
 
+.share-options {
+    position: absolute;
+    top: 50px; /* Adjust based on your layout */
+    right: 20px; /* Adjust based on your layout */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.share-options button, .share-options a {
+    display: block;
+    margin: 5px 0;
+}
+
 .navbar {
     height: 5rem;
     padding: 0 2rem 0 2rem;
