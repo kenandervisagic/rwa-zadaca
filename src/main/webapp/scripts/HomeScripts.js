@@ -125,17 +125,47 @@ document.getElementById('shareIcon').addEventListener('click', function(event) {
     const shareOptions = document.createElement('div');
     shareOptions.className = 'share-options';
     shareOptions.innerHTML = `
+        <div>
+        <a>${getVideoTitle()}</a>
         <button class="copy-link">Copy Link</button>
         <a href="https://twitter.com/share?url=https://www.youtube.com/watch?v=${getVideoId()}" target="_blank">Share on Twitter</a>
+        </div>
+        <div>
+        <a>${getSecondVideoTitle()}</a>
+        <button class="copy-link">Copy Link</button>
+        <a href="https://twitter.com/share?url=https://www.youtube.com/watch?v=${getSecondVideoId()}" target="_blank">Share on Twitter</a>
+        </div>
     `;
     document.body.appendChild(shareOptions);
 });
 
 function getVideoId() {
-    // Assuming you want to share the first video in the container
     const iframe = document.querySelector('#videoContainer iframe');
     if (iframe) {
         return iframe.getAttribute('src').split('/embed/')[1];
+    }
+    return '';
+}
+function getSecondVideoId() {
+    const iframes = document.querySelectorAll('#videoContainer iframe');
+    if (iframes.length >= 2) {
+        return iframes[1].getAttribute('src').split('/embed/')[1];
+    }
+    return '';
+}
+function getVideoTitle() {
+    // Assuming you want to share the first video in the container
+    const p = document.querySelector('#videoContainer p');
+    if (p) {
+        return p.textContent
+    }
+    return '';
+}
+function getSecondVideoTitle() {
+    // Assuming you want to share the first video in the container
+    const p = document.querySelectorAll('#videoContainer p');
+    if (p.length >= 2) {
+        return p[1].textContent
     }
     return '';
 }

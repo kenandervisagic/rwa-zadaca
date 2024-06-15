@@ -22,17 +22,11 @@
     <script src="scripts/HomeScripts.js"></script>
     <title>Rankings</title>
 </head>
-<body onload="fetchTopVideos(20)">
+<body onload="fetchTopVideos(1,20)">
 <div class="navbar">
     <div class="navbar-first-line">
         <p>Rankings</p>
         <p>
-            <a href="#" class="icon-link">
-                <i class="fas fa-sync-alt"></i>
-            </a>
-            <a href="#" class="icon-link">
-                <i class="fas fa-share-alt"></i>
-            </a>
         </p>
     </div>
     <div class="navigation">

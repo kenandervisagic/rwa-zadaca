@@ -27,12 +27,6 @@
     <div class="navbar-first-line">
         <p>Rankings</p>
         <p>
-            <a href="#" class="icon-link">
-                <i class="fas fa-sync-alt"></i>
-            </a>
-            <a href="#" class="icon-link">
-                <i class="fas fa-share-alt"></i>
-            </a>
         </p>
     </div>
     <div class="navigation">
