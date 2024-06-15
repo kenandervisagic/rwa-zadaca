@@ -25,7 +25,6 @@ function fetchVideoData() {
 
 function updateVideoData(data) {
     // Update the left video item
-    console.log(data[0].id)
     $(".video-item.left-enter p").text(data[0].title); // Update title
     $(".video-item.left-enter iframe").attr("src", 'https://www.youtube.com/embed/' + data[0].embedCode); // Update embed code
     $(".video-item.left-enter iframe").attr("id", `${data[0].id}`); // Update id

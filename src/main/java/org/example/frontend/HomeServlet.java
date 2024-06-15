@@ -14,8 +14,8 @@ import java.util.List;
 @WebServlet("/home")
 public class HomeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Video> videos = VideoDAO.getRandomVideos(2); // Fetch 2 random videos
-        request.setAttribute("video", videos.get(0));
+//        List<Video> videos = VideoDAO.getRandomVideos(2); // Fetch 2 random videos
+//        request.setAttribute("video", videos.get(0));
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }
 }
