@@ -14,35 +14,35 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 
+import static org.example.backend.VideoDAO.getTop;
+import static org.example.backend.VideoDAO.getTotalVideoCount;
+
 @WebServlet("/topVideosServlet")
 public class TopVideosServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Read the JSON data from the request body
-        BufferedReader reader = request.getReader();
-        StringBuilder stringBuilder = new StringBuilder();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            stringBuilder.append(line);
-        }
-        String jsonData = stringBuilder.toString();
+        int page = Integer.parseInt(request.getParameter("page"));
+        int pageSize = Integer.parseInt(request.getParameter("pageSize"));
 
-        // Parse the JSON data to extract the count value
-        JsonObject jsonObject = JsonParser.parseString(jsonData).getAsJsonObject();
-        int videoCount = jsonObject.get("count").getAsInt();
+        List<Video> videos = getTop(page, pageSize);
+        System.out.println(videos.size());
+        int totalVideoCount = getTotalVideoCount();
+        int totalPages = (int) Math.ceil((double) totalVideoCount / pageSize);
 
-        // Fetch data from your database or other source
-        List<Video> videos = VideoDAO.getTop(videoCount); // Assuming you have a method to fetch top videos
-
-        // Convert the data to JSON format
-        String jsonResponse = new Gson().toJson(videos);
-
-        // Set response content type to JSON
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        // Write JSON data to response
-        PrintWriter out = response.getWriter();
-        out.write(jsonResponse);
-        out.close();
+        Gson gson = new Gson();
+        String json = gson.toJson(new VideoResponse(videos, totalPages));
+        response.getWriter().write(json);
+    }
+
+    private static class VideoResponse {
+        List<Video> videos;
+        int totalPages;
+
+        VideoResponse(List<Video> videos, int totalPages) {
+            this.videos = videos;
+            this.totalPages = totalPages;
+        }
     }
 }

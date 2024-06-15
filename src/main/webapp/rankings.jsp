@@ -22,7 +22,7 @@
     <script src="scripts/HomeScripts.js"></script>
     <title>Rankings</title>
 </head>
-<body onload="fetchTopVideos(20)">
+<body onload="fetchTopVideos(1,20)">
 <div class="navbar">
     <div class="navbar-first-line">
         <p>Rankings</p>

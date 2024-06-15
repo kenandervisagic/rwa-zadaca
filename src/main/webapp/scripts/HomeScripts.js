@@ -55,22 +55,36 @@ function refreshVideos() {
     });
 }
 
-function fetchTopVideos(videoCount) {
+function fetchTopVideos(page, pageSize) {
     $.ajax({
-        url: '/rwa_zadaca_war_exploded/topVideosServlet',
-        type: 'POST', // Use POST request
-        data: JSON.stringify({ count: videoCount }), // Send the desired number of videos
-        contentType: 'application/json', // Set the content type to JSON
+        url: 'topVideosServlet',
+        type: 'POST',
+        data: { page: page, pageSize: pageSize },
         dataType: 'json',
-        success: function (data) {
-            populateTable(data);
+        success: function (response) {
+            populateTable(response.videos);
+            setupPagination(response.totalPages, page, pageSize);
         },
         error: function (xhr, status, error) {
             console.error('Error fetching top videos:', error);
         }
     });
 }
+function setupPagination(totalPages, currentPage, pageSize) {
+    var paginationContainer = $('.pagination');
+    paginationContainer.empty();
 
+    for (var i = 1; i <= totalPages; i++) {
+        var pageItem = $('<li>').addClass(i === currentPage ? 'active' : '');
+        var pageLink = $('<a>').attr('href', '#').text(i).on('click', function (e) {
+            e.preventDefault();
+            var selectedPage = parseInt($(this).text());
+            fetchTopVideos(selectedPage, pageSize);
+        });
+        pageItem.append(pageLink);
+        paginationContainer.append(pageItem);
+    }
+}
 function populateTable(data) {
     var tableBody = $('.video-table tbody');
     tableBody.empty(); // Clear existing table rows
@@ -104,7 +118,7 @@ function vote(videoId, otherVideoId) {
 
 $(document).ready(function () {
     console.log('Document ready, calling fetchTopVideos');
-    fetchTopVideos(5);
+    fetchTopVideos(1,5);
 });
 document.getElementById('shareIcon').addEventListener('click', function(event) {
     event.preventDefault();

@@ -47,14 +47,16 @@ public class VideoDAO {
         return videos;
     }
 
-    public static List<Video> getTop(int count) {
+    public static List<Video> getTop(int page, int pageSize) {
         List<Video> videos = new ArrayList<>();
+        int offset = (page - 1) * pageSize;
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
             String sql = "SELECT * FROM videos ORDER BY ((positive_votes + 1.9208) / (positive_votes + total_votes) - " +
                     "1.96 * SQRT((positive_votes * total_votes) / (positive_votes + total_votes) + 0.9604) / " +
-                    "(positive_votes + total_votes)) / (1 + 3.8416 / (positive_votes + total_votes)) DESC LIMIT ?";
+                    "(positive_votes + total_votes)) / (1 + 3.8416 / (positive_votes + total_votes)) DESC LIMIT ? OFFSET ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setInt(1, count);
+                statement.setInt(1, pageSize);
+                statement.setInt(2, offset);
                 ResultSet rs = statement.executeQuery();
                 while (rs.next()) {
                     Video video = new Video(
@@ -73,6 +75,23 @@ public class VideoDAO {
         }
         return videos;
     }
+
+    public static int getTotalVideoCount() {
+        int totalVideoCount = 0;
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+            String sql = "SELECT COUNT(*) AS total FROM videos";
+            try (PreparedStatement statement = connection.prepareStatement(sql);
+                 ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    totalVideoCount = resultSet.getInt("total");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return totalVideoCount;
+    }
+
     public static void incrementPositiveVotes(int videoId) {
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
             String sql = "UPDATE videos SET positive_votes = positive_votes + 1 WHERE id = ?";
