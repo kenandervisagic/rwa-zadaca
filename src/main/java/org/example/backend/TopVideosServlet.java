@@ -1,17 +1,13 @@
 package org.example.backend;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import jakarta.servlet.annotation.WebServlet;
 import com.google.gson.Gson;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
 import java.util.List;
 
 import static org.example.backend.VideoDAO.getTop;
@@ -24,7 +20,6 @@ public class TopVideosServlet extends HttpServlet {
         int pageSize = Integer.parseInt(request.getParameter("pageSize"));
 
         List<Video> videos = getTop(page, pageSize);
-        System.out.println(videos.size());
         int totalVideoCount = getTotalVideoCount();
         int totalPages = (int) Math.ceil((double) totalVideoCount / pageSize);
 

@@ -24,30 +24,29 @@ function fetchVideoData() {
 }
 
 function updateVideoData(data) {
-    // Update the left video item
-    $(".video-item.left-enter p").text(data[0].title); // Update title
-    $(".video-item.left-enter iframe").attr("src", 'https://www.youtube.com/embed/' + data[0].embedCode); // Update embed code
-    $(".video-item.left-enter iframe").attr("id", `${data[0].id}`); // Update id
-    $(".video-item.left-enter button").attr("onclick", `vote(${data[0].id}, ${data[1].id})`); // Update id
+    
+    $(".video-item.left-enter p").text(data[0].title); 
+    $(".video-item.left-enter iframe").attr("src", 'https://www.youtube.com/embed/' + data[0].embedCode); 
+    $(".video-item.left-enter iframe").attr("id", `${data[0].id}`); 
+    $(".video-item.left-enter button").attr("onclick", `vote(${data[0].id}, ${data[1].id})`); 
 
-    // Update the right video item
-    $(".video-item.right-enter p").text(data[1].title); // Update title
-    $(".video-item.right-enter iframe").attr("src", 'https://www.youtube.com/embed/' + data[1].embedCode); // Update embed code
-    $(".video-item.right-enter iframe").attr("id", `${data[1].id}`); // Update id}
-    $(".video-item.right-enter button").attr("onclick", `vote(${data[1].id}, ${data[0].id})`); // Update id}
+    
+    $(".video-item.right-enter p").text(data[1].title); 
+    $(".video-item.right-enter iframe").attr("src", 'https://www.youtube.com/embed/' + data[1].embedCode); 
+    $(".video-item.right-enter iframe").attr("id", `${data[1].id}`); 
+    $(".video-item.right-enter button").attr("onclick", `vote(${data[1].id}, ${data[0].id})`); 
 }
 
 function refreshVideos() {
     $.ajax({
         url: "/rwa_zadaca_war_exploded/randomVideos",
-        type: "POST", // HTTP method (GET in this case)
-        dataType: "json", // Expected data type of the response
+        type: "POST", 
+        dataType: "json", 
         data: {"data": "refresh"},
         success: function (data) {
-            // Handle the JSON data received from the servlet
-            // For example, update the DOM with the new video information
+            
+            
             updateVideoData(data);
-            console.log(data[0].id)
         },
         error: function (xhr, status, error) {
             console.error("Error fetching videos:", error);
@@ -62,7 +61,7 @@ function fetchTopVideos(page, pageSize) {
         data: { page: page, pageSize: pageSize },
         dataType: 'json',
         success: function (response) {
-            populateTable(response.videos);
+            populateTable(response.videos, page, pageSize);
             setupPagination(response.totalPages, page, pageSize);
         },
         error: function (xhr, status, error) {
@@ -85,15 +84,17 @@ function setupPagination(totalPages, currentPage, pageSize) {
         paginationContainer.append(pageItem);
     }
 }
-function populateTable(data) {
-    var tableBody = $('.video-table tbody');
-    tableBody.empty(); // Clear existing table rows
+function populateTable(data, page, pageSize) {
+    const tableBody = $('.video-table tbody');
+    tableBody.empty(); 
+
+    const startIndex = (page - 1) * pageSize;
     data.forEach(function (video, index) {
         const row = $('<tr>');
         row.append('<td><img src="http://img.youtube.com/vi/' + video.embedCode + '/maxresdefault.jpg" alt="' + video.title + '"></td>');
         row.append('<td>' + video.title + '</td>');
         row.append('<td>' + (video.positiveVotes + "/" + video.totalVotes) + '</td>');
-        row.append('<td>' + (index + 1) + '</td>');
+        row.append('<td>' + (startIndex + index + 1) + '</td>');
         tableBody.append(row);
     });
 }
@@ -154,7 +155,7 @@ function getSecondVideoId() {
     return '';
 }
 function getVideoTitle() {
-    // Assuming you want to share the first video in the container
+    
     const p = document.querySelector('#videoContainer p');
     if (p) {
         return p.textContent
@@ -162,7 +163,7 @@ function getVideoTitle() {
     return '';
 }
 function getSecondVideoTitle() {
-    // Assuming you want to share the first video in the container
+    
     const p = document.querySelectorAll('#videoContainer p');
     if (p.length >= 2) {
         return p[1].textContent

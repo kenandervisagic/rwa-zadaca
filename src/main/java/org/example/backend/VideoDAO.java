@@ -6,16 +6,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class VideoDAO {
-    private static final String URL = "jdbc:mysql://localhost:3305/video_database"; // Ažurirano s portom 3305
+    private static final String URL = "jdbc:mysql://localhost:3305/video_database"; 
     private static final String USER = "root";
     private static final String PASSWORD = "keno";
 
     static {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver"); // Load the MySQL driver
+            Class.forName("com.mysql.cj.jdbc.Driver"); 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

@@ -17,7 +17,20 @@
     <link rel="stylesheet" href="styles/table.css">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="icon" type="image/jpg" href="https://www.shutterstock.com/image-vector/hand-voting-ballot-box-icon-600nw-1340887919.jpg">
+    <style>
+        .share-options {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
 
+        .video-share {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Home</title>

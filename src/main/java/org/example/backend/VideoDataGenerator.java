@@ -7,33 +7,33 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class VideoDataGenerator {
-    private static final String URL = "jdbc:mysql://localhost:3305/video_database"; // Ažurirano s portom 3305
-    private static final String USER = "root"; // Zamijenite s novim korisničkim imenom
-    private static final String PASSWORD = "keno"; // Zamijenite s novom lozinkom
-    private static final int VIDEO_COUNT = 100; // Broj videa koje želite generirati
+    private static final String URL = "jdbc:mysql://localhost:3305/video_database"; 
+    private static final String USER = "root"; 
+    private static final String PASSWORD = "keno"; 
+    private static final int VIDEO_COUNT = 100; 
+    static String[] embedCodes = {
+            "gtTVuebS-Ss",
+            "BY_XwvKogC8",
+            "-GxsoWX-Nr4",
+            "RRj1WOkE9P0",
+            "d5gf9dXbPi0",
+            "VMT50KhLlRw",
+            "iv8tu2qemP0",
+            "QREab0kaAGU",
+            "LYGPfakosCs",
+            "d7tpYyAnopA",
+            "ks2-b3dUDKw",
+            "XQv3FL5I6RY",
+            "_qBnBbJyNug",
+            "02HYSqHrCZQ",
+            "X-UTfyUbLUw",
+            "1gyUQXVna-8",
+            "6u_cgKR_D3w",
+            "0fhrf-BMPxY"
+    };
 
     public static void main(String[] args) {
         Faker faker = new Faker();
-        String[] embedCodes = {
-                "9bZkp7q19f0",
-                "gtTVuebS-Ss",
-                "-GxsoWX-Nr4",
-                "RRj1WOkE9P0",
-                "VMT50KhLlRw",
-                "LnrTDS85rC8",
-                "iv8tu2qemP0",
-                "QREab0kaAGU",
-                "LYGPfakosCs",
-                "d7tpYyAnopA",
-                "ks2-b3dUDKw",
-                "XQv3FL5I6RY",
-                "_qBnBbJyNug",
-                "02HYSqHrCZQ",
-                "X-UTfyUbLUw",
-                "1gyUQXVna-8",
-                "6u_cgKR_D3w",
-                "0fhrf-BMPxY"
-        };
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
             String sql = "INSERT INTO videos (title, description, positive_votes, total_votes, embed_code) VALUES (?, ?, 0, 0, ?)";
@@ -48,12 +48,12 @@ public class VideoDataGenerator {
                 statement.setString(3, embedCode);
                 statement.addBatch();
 
-                if (i % 10 == 0) { // Execute batch every 10 inserts
+                if (i % 10 == 0) { 
                     statement.executeBatch();
                 }
             }
 
-            statement.executeBatch(); // Execute remaining batches
+            statement.executeBatch(); 
             System.out.println("Database populated with " + VIDEO_COUNT + " videos.");
 
         } catch (SQLException e) {
